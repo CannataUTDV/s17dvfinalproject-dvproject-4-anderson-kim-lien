@@ -1,0 +1,602 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 10200.17.0328.0755                               -->
+<workbook source-build='10.2.1 (10200.17.0328.0755)' source-platform='mac' version='10.2' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='&quot;christinalien/s-17-dv-final-project&quot;' inline='true' name='federated.1qj9bhb04bcbub14hrltz175gva9' version='10.2'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='&quot;christinalien/s-17-dv-final-project&quot;' name='webdata-direct.14jymvw08vt09s1ahh0zl0uzh7sv'>
+            <connection APIVersion='' authType='none' authentication='no' channel='http' class='webdata-direct' connectionData='{&quot;dataset&quot;:&quot;christinalien/s-17-dv-final-project&quot;,&quot;apiToken&quot;:&quot;eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50OmJhd2VlayIsImlzcyI6ImFnZW50OmJhd2Vlazo6OGEyN2I5NzktOWNiNy00MTE0LWIwZWYtNWNiMjIzOGUyMjBjIiwiaWF0IjoxNDg1Mzk1MDQyLCJyb2xlIjpbInVzZXJfYXBpX3dyaXRlIiwidXNlcl9hcGlfcmVhZCJdLCJnZW5lcmFsLXB1cnBvc2UiOnRydWV9.wW7Zoyf995WA5QMwvzKvkn2CjQKGcwD8pg2jIPjAS4ZnOVGiMiKa9e1R73Y5DGUf7VrwxQ1iL6z8OawENhB6CQ&quot;}' connectionName='&quot;christinalien/s-17-dv-final-project&quot;' filename='' increment-key='' path='/' port='80' scriptVersion='' secondary_whitelist='' server='tableau.data.world' urlQuery='' username='' usernameAlias='' />
+          </named-connection>
+        </named-connections>
+        <relation join='inner' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[population_byage].[v_0]' />
+              <expression op='[Adult_Adolescent_Obesity].[v_0]' />
+            </expression>
+          </clause>
+          <relation connection='webdata-direct.14jymvw08vt09s1ahh0zl0uzh7sv' name='population_byage' table='[populationbyage]' type='table' />
+          <relation connection='webdata-direct.14jymvw08vt09s1ahh0zl0uzh7sv' name='Adult_Adolescent_Obesity' table='[AdultAdolescentObesity]' type='table' />
+        </relation>
+        <cols>
+          <map key='[v_0 (Adult_Adolescent_Obesity)]' value='[Adult_Adolescent_Obesity].[v_0]' />
+          <map key='[v_0]' value='[population_byage].[v_0]' />
+          <map key='[v_1 (Adult_Adolescent_Obesity)]' value='[Adult_Adolescent_Obesity].[v_1]' />
+          <map key='[v_1]' value='[population_byage].[v_1]' />
+          <map key='[v_2 (Adult_Adolescent_Obesity)]' value='[Adult_Adolescent_Obesity].[v_2]' />
+          <map key='[v_2]' value='[population_byage].[v_2]' />
+          <map key='[v_3]' value='[population_byage].[v_3]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>v_0</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[v_0]</local-name>
+            <parent-name>[population_byage]</parent-name>
+            <remote-alias>AreaName</remote-alias>
+            <ordinal>0</ordinal>
+            <caption>AreaName</caption>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;string&quot;</attribute>
+              <attribute datatype='boolean' name='filterable_column'>false</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_1</remote-name>
+            <remote-type>0</remote-type>
+            <local-name>[v_1]</local-name>
+            <parent-name>[population_byage]</parent-name>
+            <remote-alias>adolescentpop</remote-alias>
+            <ordinal>1</ordinal>
+            <caption>adolescentpop</caption>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;int&quot;</attribute>
+              <attribute datatype='boolean' name='filterable_column'>false</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_2</remote-name>
+            <remote-type>0</remote-type>
+            <local-name>[v_2]</local-name>
+            <parent-name>[population_byage]</parent-name>
+            <remote-alias>adultpop</remote-alias>
+            <ordinal>2</ordinal>
+            <caption>adultpop</caption>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;int&quot;</attribute>
+              <attribute datatype='boolean' name='filterable_column'>false</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_3</remote-name>
+            <remote-type>0</remote-type>
+            <local-name>[v_3]</local-name>
+            <parent-name>[population_byage]</parent-name>
+            <remote-alias>totalpop</remote-alias>
+            <ordinal>3</ordinal>
+            <caption>totalpop</caption>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;int&quot;</attribute>
+              <attribute datatype='boolean' name='filterable_column'>false</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_0</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[v_0 (Adult_Adolescent_Obesity)]</local-name>
+            <parent-name>[Adult_Adolescent_Obesity]</parent-name>
+            <remote-alias>Location</remote-alias>
+            <ordinal>4</ordinal>
+            <caption>Location</caption>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;string&quot;</attribute>
+              <attribute datatype='boolean' name='filterable_column'>false</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_1</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_1 (Adult_Adolescent_Obesity)]</local-name>
+            <parent-name>[Adult_Adolescent_Obesity]</parent-name>
+            <remote-alias>Value</remote-alias>
+            <ordinal>5</ordinal>
+            <caption>Value</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+              <attribute datatype='boolean' name='filterable_column'>false</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_2</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[v_2 (Adult_Adolescent_Obesity)]</local-name>
+            <parent-name>[Adult_Adolescent_Obesity]</parent-name>
+            <remote-alias>Age</remote-alias>
+            <ordinal>6</ordinal>
+            <caption>Age</caption>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;string&quot;</attribute>
+              <attribute datatype='boolean' name='filterable_column'>false</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Location' datatype='string' name='[v_0 (Adult_Adolescent_Obesity)]' role='dimension' type='nominal' />
+      <column caption='AreaName' datatype='string' name='[v_0]' role='dimension' type='nominal' />
+      <column caption='Value' datatype='real' name='[v_1 (Adult_Adolescent_Obesity)]' role='measure' type='quantitative' />
+      <column caption='adolescentpop' datatype='integer' name='[v_1]' role='measure' type='quantitative' />
+      <column caption='Age' datatype='string' name='[v_2 (Adult_Adolescent_Obesity)]' role='dimension' type='nominal' />
+      <column caption='adultpop' datatype='integer' name='[v_2]' role='measure' type='quantitative' />
+      <column caption='totalpop' datatype='integer' name='[v_3]' role='measure' type='quantitative' />
+      <extract count='-1' enabled='true' units='records'>
+        <connection class='dataengine' dbname='/Users/baweek/Documents/My Tableau Repository/Datasources/federated.1qj9bhb04bcbub14hrltz175gva9_18lkgzo1p4dlob178w7dy0y9tcta.tde' schema='Extract' tablename='Extract' update-time='05/01/2017 12:58:05 AM'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <cols>
+            <map key='[v_0 (Adult_Adolescent_Obesity)]' value='[Extract].[v_0]' />
+            <map key='[v_0]' value='[Extract].[v_01]' />
+            <map key='[v_1 (Adult_Adolescent_Obesity)]' value='[Extract].[v_1]' />
+            <map key='[v_1]' value='[Extract].[v_11]' />
+            <map key='[v_2 (Adult_Adolescent_Obesity)]' value='[Extract].[v_2]' />
+            <map key='[v_2]' value='[Extract].[v_21]' />
+            <map key='[v_3]' value='[Extract].[v_3]' />
+          </cols>
+          <refresh>
+            <refresh-event add-from-file-path='' increment-value='%null%' refresh-type='create' rows-inserted='94' timestamp-start='2017-05-01 00:58:05.879' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>v_0</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[v_0 (Adult_Adolescent_Obesity)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_0</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Adult_Adolescent_Obesity</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>52</approx-count>
+              <scale>1</scale>
+              <width>1073741823</width>
+              <contains-null>false</contains-null>
+              <collation flag='0' name='LROOT' />
+              <statistics>
+                <statistic aggregation='Min' datatype='string'>&quot;Alabama&quot;</statistic>
+                <statistic aggregation='Max' datatype='string'>&quot;Wyoming&quot;</statistic>
+                <statistic aggregation='Count' datatype='integer'>94</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteCollation'>&quot;root&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>2</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_01</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[v_0]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_01</remote-alias>
+              <ordinal>1</ordinal>
+              <family>population_byage</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>52</approx-count>
+              <scale>1</scale>
+              <width>1073741823</width>
+              <contains-null>false</contains-null>
+              <collation flag='0' name='LROOT' />
+              <statistics>
+                <statistic aggregation='Min' datatype='string'>&quot;Alabama&quot;</statistic>
+                <statistic aggregation='Max' datatype='string'>&quot;Wyoming&quot;</statistic>
+                <statistic aggregation='Count' datatype='integer'>94</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteCollation'>&quot;root&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>2</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>2</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_1</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_1 (Adult_Adolescent_Obesity)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_1</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Adult_Adolescent_Obesity</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>79</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>2048.3000000000006</statistic>
+                <statistic aggregation='Avg' datatype='real'>21.790425531914899</statistic>
+                <statistic aggregation='Min' datatype='real'>6.4000000000000004</statistic>
+                <statistic aggregation='Max' datatype='real'>35.899999999999999</statistic>
+                <statistic aggregation='Stdev' datatype='real'>8.8150173567481414</statistic>
+                <statistic aggregation='StdevP' datatype='real'>8.7680035956291054</statistic>
+                <statistic aggregation='Var' datatype='real'>77.704530999770981</statistic>
+                <statistic aggregation='VarP' datatype='real'>76.877887052964908</statistic>
+                <statistic aggregation='Count' datatype='integer'>94</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>51859.850000000006</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_11</remote-name>
+              <remote-type>3</remote-type>
+              <local-name>[v_1]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_11</remote-alias>
+              <ordinal>3</ordinal>
+              <family>population_byage</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>52</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>37631182.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>400331.72340425535</statistic>
+                <statistic aggregation='Min' datatype='integer'>30835</statistic>
+                <statistic aggregation='Max' datatype='integer'>2667023</statistic>
+                <statistic aggregation='Stdev' datatype='real'>443901.70922964235</statistic>
+                <statistic aggregation='StdevP' datatype='real'>441534.21656644548</statistic>
+                <statistic aggregation='Var' datatype='real'>197048727456.99796</statistic>
+                <statistic aggregation='VarP' datatype='real'>194952464398.94476</statistic>
+                <statistic aggregation='Count' datatype='integer'>94</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>33390487597300.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint32&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_2</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[v_2 (Adult_Adolescent_Obesity)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_2</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Adult_Adolescent_Obesity</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <scale>1</scale>
+              <width>1073741823</width>
+              <contains-null>false</contains-null>
+              <collation flag='0' name='LROOT' />
+              <statistics>
+                <statistic aggregation='Min' datatype='string'>&quot;Adolescent&quot;</statistic>
+                <statistic aggregation='Max' datatype='string'>&quot;Adult&quot;</statistic>
+                <statistic aggregation='Count' datatype='integer'>94</statistic>
+                <statistic aggregation='Median' datatype='string'>&quot;Adult&quot;</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteCollation'>&quot;root&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (ordered)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>0</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_21</remote-name>
+              <remote-type>3</remote-type>
+              <local-name>[v_2]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_21</remote-alias>
+              <ordinal>5</ordinal>
+              <family>population_byage</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>52</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>409294479.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>4354196.5851063831</statistic>
+                <statistic aggregation='Min' datatype='integer'>426894</statistic>
+                <statistic aggregation='Max' datatype='integer'>28164026</statistic>
+                <statistic aggregation='Stdev' datatype='real'>4727376.3035628917</statistic>
+                <statistic aggregation='StdevP' datatype='real'>4702163.4501718134</statistic>
+                <statistic aggregation='Var' datatype='real'>22348086715487.945</statistic>
+                <statistic aggregation='VarP' datatype='real'>22110341112131.691</statistic>
+                <statistic aggregation='Count' datatype='integer'>94</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>3860520687305075.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint32&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_3</remote-name>
+              <remote-type>3</remote-type>
+              <local-name>[v_3]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_3</remote-alias>
+              <ordinal>6</ordinal>
+              <family>population_byage</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>52</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>553479663.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>5888081.521276596</statistic>
+                <statistic aggregation='Min' datatype='integer'>579679</statistic>
+                <statistic aggregation='Max' datatype='integer'>38421464</statistic>
+                <statistic aggregation='Stdev' datatype='real'>6428181.6147359349</statistic>
+                <statistic aggregation='StdevP' datatype='real'>6393897.7350072553</statistic>
+                <statistic aggregation='Var' datatype='real'>41321518872029.086</statistic>
+                <statistic aggregation='VarP' datatype='real'>40881928245730.906</statistic>
+                <statistic aggregation='Count' datatype='integer'>94</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>7101834631211403.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint32&quot;</attribute>
+              </attributes>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.5' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='National Obesity Rates per State'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='&quot;christinalien/s-17-dv-final-project&quot;' name='federated.1qj9bhb04bcbub14hrltz175gva9' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1qj9bhb04bcbub14hrltz175gva9'>
+            <column-instance column='[v_0 (Adult_Adolescent_Obesity)]' derivation='None' name='[none:v_0 (Adult_Adolescent_Obesity):nk]' pivot='key' type='nominal' />
+            <column-instance column='[v_1 (Adult_Adolescent_Obesity)]' derivation='None' name='[none:v_1 (Adult_Adolescent_Obesity):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[v_2 (Adult_Adolescent_Obesity)]' derivation='None' name='[none:v_2 (Adult_Adolescent_Obesity):nk]' pivot='key' type='nominal' />
+            <column-instance column='[v_1 (Adult_Adolescent_Obesity)]' derivation='Sum' name='[sum:v_1 (Adult_Adolescent_Obesity):qk]' pivot='key' type='quantitative' />
+            <column caption='Location' datatype='string' name='[v_0 (Adult_Adolescent_Obesity)]' role='dimension' type='nominal' />
+            <column caption='Value' datatype='real' name='[v_1 (Adult_Adolescent_Obesity)]' role='measure' type='quantitative' />
+            <column caption='Age' datatype='string' name='[v_2 (Adult_Adolescent_Obesity)]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_1 (Adult_Adolescent_Obesity):qk]' included-values='in-range'>
+            <min>6.4000000000000004</min>
+            <max>35.899999999999999</max>
+          </filter>
+          <filter class='categorical' column='[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_2 (Adult_Adolescent_Obesity):nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:v_2 (Adult_Adolescent_Obesity):nk]' member='&quot;Adolescent&quot;' />
+              <groupfilter function='member' level='[none:v_2 (Adult_Adolescent_Obesity):nk]' member='&quot;Adult&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_2 (Adult_Adolescent_Obesity):nk]</column>
+            <column>[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_1 (Adult_Adolescent_Obesity):qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_0 (Adult_Adolescent_Obesity):nk]' />
+              <lod column='[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_2 (Adult_Adolescent_Obesity):nk]' />
+            </encodings>
+            <reference-line axis-column='[federated.1qj9bhb04bcbub14hrltz175gva9].[sum:v_1 (Adult_Adolescent_Obesity):qk]' boxplot-mark-exclusion='false' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline0' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.1qj9bhb04bcbub14hrltz175gva9].[sum:v_1 (Adult_Adolescent_Obesity):qk]' z-order='1' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.25' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1qj9bhb04bcbub14hrltz175gva9].[sum:v_1 (Adult_Adolescent_Obesity):qk]</rows>
+        <cols>[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_2 (Adult_Adolescent_Obesity):nk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='National Obesity Rates per State'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_0 (Adult_Adolescent_Obesity):nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_0 (Adult_Adolescent_Obesity):nk]</field>
+            <field>[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_1 (Adult_Adolescent_Obesity):qk]</field>
+            <field>[federated.1qj9bhb04bcbub14hrltz175gva9].[none:v_2 (Adult_Adolescent_Obesity):nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='National Obesity Rates per State' width='176'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
