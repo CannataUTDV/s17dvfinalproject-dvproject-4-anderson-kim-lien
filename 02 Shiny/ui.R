@@ -2,6 +2,8 @@
 require(shiny)
 require(shinydashboard)
 require(DT)
+require(leaflet)
+require(plotly)
 
 
 dashboardPage(
@@ -9,19 +11,35 @@ dashboardPage(
   ),
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Adult & Adolescent Obesity", tabName = "barchart", icon = icon("dashboard"))
+      menuItem("Obesity Boxplot", tabName = "boxplot", icon = icon("dashboard")),
+      menuItem("Obesity Histogram", tabName = "histogram", icon = icon("dashboard")),
+      menuItem("Obesity Scatterplot", tabName = "scatterplot", icon = icon("dashboard")),
+      menuItem("Obesity Crosstabs", tabName = "crosstabs", icon = icon("dashboard")),
+      menuItem("Risk Factors of Obesity Barcharts", tabName = "barchart", icon = icon("dashboard"))
     )
   ),
   dashboardBody(    
     tabItems(
-      tabItem(tabName = "barchart",
+      tabItem(tabName = "boxplot",
               tabsetPanel(
-                tabPanel("Obesity by Region", "Barchart of Adolescent & Adult Obesity Rates by Region", hr(),"Black = Average Obesity Rate, Red = Average Obesity Rate per Region",plotOutput("plot1")),
-                #visualization 2 ui data
-                 tabPanel("top 5 Obese states", "Barchart of the top 5 obese states", hr(),"Red = Number of obese citizens in the state",plotOutput("plot2")),
-                tabPanel("Lowest 3 Obesity Rates by Region", "Barchart of Lowest 3 Obesity Rates in Each Region", hr(), "Black = Average Obesity Rate, Red = Average Obesity Rate per Region", plotOutput("plot3"))
-         )
-      )
+                tabPanel("Title 1"))), 
+      
+      tabItem(tabName = "histogram",
+              tabsetPanel(
+                tabPanel("Title 2"))),
+      
+      tabItem(tabName = "scatterplot",
+              tabsetPanel(
+                tabPanel("Title 3"))),
+      
+      tabItem(tabName = "crosstabs",
+              tabsetPanel(
+                tabPanel("Title 4"))),
+      
+      tabItem(tabName = "barchart",
+              tabsetPanel(tabPanel("Data", "This data is a join of the Adult_Adolescent_Obesity data and the CHSI Risk Factors data",DT::dataTableOutput("barchartData1")),
+                tabPanel("Obesity & Risk Factor Data", "Barchart Obesity Rates & Risk Factor Data by State",plotOutput("barchartplot1",height=2000)),
+                tabPanel("Top 10 Obesity Rates",plotlyOutput("barchartplot2"))))
     )
   )
 )
