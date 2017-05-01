@@ -25,17 +25,95 @@ from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Na
 
 barchartdf2<-gather(barchartdf1,type,value,-Location)
 
-barchartdf3 <- query(
+barchartdf4 = barchartdf2 %>% dplyr::group_by(type)%>%dplyr::filter(Location!='Alaska') %>% dplyr::summarise(KPI_barchart=mean(value))
+
+
+
+KPI_Diabetes=dplyr::filter(barchartdf4,type=='Avg_Diabetes')%>%dplyr::select(KPI_barchart)
+KPI_FewFruitVeg=dplyr::filter(barchartdf4,type=='Avg_FewFruitVeg')%>%dplyr::select(KPI_barchart)
+KPI_HighBloodPres=dplyr::filter(barchartdf4,type=='Avg_HighBloodPres')%>%dplyr::select(KPI_barchart)
+KPI_NoExercise=dplyr::filter(barchartdf4,type=='Avg_NoExercise')%>%dplyr::select(KPI_barchart)
+KPI_Smoker=dplyr::filter(barchartdf4,type=='Avg_Smoker')%>%dplyr::select(KPI_barchart)
+
+barchartdiabetes<- query(
   data.world(propsfile = "www/.data.world"),
   dataset="christinalien/s-17-dv-final-project", type="sql",
-  query="SELECT Adult_Adolescent_Obesity.Location as Location, avg(Adult_Adolescent_Obesity.Value) as Avg_Obesity, avg(RiskFactors.Diabetes) as Avg_Diabetes, avg(RiskFactors.Few_Fruit_Veg) as Avg_FewFruitVeg, avg(RiskFactors.High_Blood_Pres) as Avg_HighBloodPres, avg(RiskFactors.No_Exercise) as Avg_NoExercise, avg(RiskFactors.Smoker) as Avg_Smoker
-from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Name=Adult_Adolescent_Obesity.Location
+  query="SELECT Adult_Adolescent_Obesity.Location as Location, avg(Adult_Adolescent_Obesity.Value) as Avg_Obesity, avg(RiskFactors.Diabetes) as Avg_Diabetes, 
+case 
+when avg(RiskFactors.Diabetes) < ? then '02 Low' 
+else '01 High' 
+end As kpi
+from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Name=Adult_Adolescent_Obesity.Location 
   where Location!='District of Columbia'
   group by Location
   having avg(Adult_Adolescent_Obesity.Value)>25.0
-  order by Location"
+  order by Location",
+  queryParameters = KPI_Diabetes
 ) 
 
+barchartfewfruitveg<- query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT Adult_Adolescent_Obesity.Location as Location, avg(Adult_Adolescent_Obesity.Value) as Avg_Obesity, avg(RiskFactors.Few_Fruit_Veg) as Avg_FewFruitVeg, 
+  case 
+  when avg(RiskFactors.Few_Fruit_Veg) < ? then '02 Low' 
+  else '01 High' 
+  end As kpi
+  from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Name=Adult_Adolescent_Obesity.Location 
+  where Location!='District of Columbia'
+  group by Location
+  having avg(Adult_Adolescent_Obesity.Value)>25.0
+  order by Location",
+  queryParameters = KPI_FewFruitVeg
+) 
+
+barcharthighbloodpres<- query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT Adult_Adolescent_Obesity.Location as Location, avg(Adult_Adolescent_Obesity.Value) as Avg_Obesity, avg(RiskFactors.High_Blood_Pres) as Avg_HighBloodPres, 
+  case 
+  when avg(RiskFactors.High_Blood_Pres) < ? then '02 Low' 
+  else '01 High' 
+  end As kpi
+  from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Name=Adult_Adolescent_Obesity.Location 
+  where Location!='District of Columbia'
+  group by Location
+  having avg(Adult_Adolescent_Obesity.Value)>25.0
+  order by Location",
+  queryParameters = KPI_HighBloodPres
+) 
+
+barchartnoexercise<- query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT Adult_Adolescent_Obesity.Location as Location, avg(Adult_Adolescent_Obesity.Value) as Avg_Obesity, avg(RiskFactors.No_Exercise) as Avg_NoExercise, 
+  case 
+  when avg(RiskFactors.No_Exercise) < ? then '02 Low' 
+  else '01 High' 
+  end As kpi
+  from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Name=Adult_Adolescent_Obesity.Location 
+  where Location!='District of Columbia'
+  group by Location
+  having avg(Adult_Adolescent_Obesity.Value)>25.0
+  order by Location",
+  queryParameters = KPI_NoExercise
+) 
+
+barchartsmoker<- query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT Adult_Adolescent_Obesity.Location as Location, avg(Adult_Adolescent_Obesity.Value) as Avg_Obesity, avg(RiskFactors.Smoker) as Avg_Smoker, 
+  case 
+  when avg(RiskFactors.Smoker) < ? then '02 Low' 
+  else '01 High' 
+  end As kpi
+  from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Name=Adult_Adolescent_Obesity.Location 
+  where Location!='District of Columbia'
+  group by Location
+  having avg(Adult_Adolescent_Obesity.Value)>25.0
+  order by Location",
+  queryParameters = KPI_Smoker
+) 
 
 shinyServer(function(input, output) {
   
@@ -46,8 +124,27 @@ shinyServer(function(input, output) {
   })
   
   output$barchartplot2 <- renderPlotly({
-    p1 <-ggplot(barchartdf3, aes(x=Location,y = Avg_Diabetes)) +geom_bar(stat = "identity") +geom_line(aes(x,y,linetype=avgdiabetes),avgdiabetes)
-    ggplotly(p1)
+    p2 <-ggplot(barchartdiabetes) + geom_col(aes(x = Location, y=Avg_Diabetes,fill=kpi))+geom_point(aes(x=Location,y=Avg_Obesity))
+    ggplotly(p2)
   })
  
+  output$barchartplot3 <- renderPlotly({
+    p3 <-ggplot(barchartfewfruitveg) + geom_col(aes(x = Location, y=Avg_FewFruitVeg,fill=kpi))+geom_point(aes(x=Location,y=Avg_Obesity))
+    ggplotly(p3)
+  })
+  
+  output$barchartplot4 <- renderPlotly({
+    p4 <-ggplot(barcharthighbloodpres) + geom_col(aes(x = Location, y=Avg_HighBloodPres,fill=kpi))+geom_point(aes(x=Location,y=Avg_Obesity))
+    ggplotly(p4)
+  })
+  
+  output$barchartplot5 <- renderPlotly({
+    p5 <-ggplot(barchartnoexercise) + geom_col(aes(x = Location, y=Avg_NoExercise,fill=kpi))+geom_point(aes(x=Location,y=Avg_Obesity))
+    ggplotly(p5)
+  })
+  
+  output$barchartplot6 <- renderPlotly({
+    p6 <-ggplot(barchartsmoker) + geom_col(aes(x = Location, y=Avg_Smoker,fill=kpi))+geom_point(aes(x=Location,y=Avg_Obesity))
+    ggplotly(p6)
+  })
 })

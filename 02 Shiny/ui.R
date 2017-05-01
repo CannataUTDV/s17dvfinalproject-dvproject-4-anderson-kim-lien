@@ -39,7 +39,7 @@ dashboardPage(
       tabItem(tabName = "barchart",
               tabsetPanel(tabPanel("Data", "This data is a join of the Adult_Adolescent_Obesity data and the CHSI Risk Factors data",DT::dataTableOutput("barchartData1")),
                 tabPanel("Obesity & Risk Factor Data", "Barchart Obesity Rates & Risk Factor Data by State",plotOutput("barchartplot1",height=2000)),
-                tabPanel("Top 10 Obesity Rates",plotlyOutput("barchartplot2"))))
+                tabPanel("Top 10 Obesity Rates",plotlyOutput("barchartplot2"),hr(),plotlyOutput("barchartplot3"),hr(),plotlyOutput("barchartplot4"),hr(),plotlyOutput("barchartplot5"),hr(),plotlyOutput("barchartplot6"))))
     )
   )
 )
