@@ -11,6 +11,31 @@ require(leaflet)
 require(plotly)
 require(lubridate)
 
+boxplot1 <- query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT Adult_Adolescent_Obesity.Age as Age, Sum(Adult_Adolescent_Obesity.Value) as Value, Adult_Adolescent_Obesity.Location as Location
+  from Adult_Adolescent_Obesity
+  group by Location, Age
+"
+)
+
+histogram1 <- query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT CI_Max_Fruit_Veg as FruitsVegs FROM RiskFactors
+  "
+)
+
+scatterplot1 <-query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT avg(a.D_Wh_HeartDis), a.CHSI_State_Name, b.Age,avg(b.Value) as Value,b.Location
+  FROM leadingCOD a join Adult_Adolescent_Obesity b
+  ON (a.CHSI_State_Name = b.Location)
+  group by b.Location
+  "
+) 
 
 barchartdf1 <- query(
   data.world(propsfile = "www/.data.world"),
@@ -128,17 +153,30 @@ crosstab1 <-query(
   order by a.census_region_name"
  ) 
 
-scatterplot1 <-query(
-  data.world(propsfile = "www/.data.world"),
-  dataset="christinalien/s-17-dv-final-project", type="sql",
-  query="SELECT avg(a.D_Wh_HeartDis), a.CHSI_State_Name, b.Age,avg(b.Value) as Value,b.Location
-  FROM leadingCOD a join Adult_Adolescent_Obesity b
-  ON (a.CHSI_State_Name = b.Location)
-  group by b.Location
-  "
-) 
-
 shinyServer(function(input, output) {
+#boxplot
+  output$boxplotData <- renderDataTable({DT::datatable(boxplot1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE))
+  })
+  
+  output$boxplot <-renderPlotly({p <- ggplot(boxplot1) + 
+    theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
+    theme(axis.text.y=element_text(size=16, hjust=0.5)) +
+    geom_boxplot(aes(x=Age, y=Value, group=Age, colour=Location), size=2)+
+    geom_point(aes(x=Age, y=Value, colour=Location), size=2)
+    ggplotly(p)
+  })
+  
+#histogram
+  output$histogramData <- renderDataTable({DT::datatable(histogram1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE))
+  })
+  
+  output$histogram <- renderPlotly({p <- ggplot(histogram1) +
+    geom_histogram(aes(x=FruitsVegs)) +
+    theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5))
+    ggplotly(p)
+
+  })
+  
 #scatterplots
   output$scatterplotData <- renderDataTable({DT::datatable(scatterplot1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
