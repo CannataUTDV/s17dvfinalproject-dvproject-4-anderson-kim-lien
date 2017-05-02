@@ -31,7 +31,7 @@ source("../01 Data/adolescent obesity ETL.R")
 ```{r}
 source("../01 Data/adult obesity ETL.R")
 ```
-We also utilized joins to make the visualizations more interesting. We used a state table that divided up the different states into regions (https://data.world/markmarkoh/us-state-table), the US Census data for population (https://data.world/uscensusbureau/acs-2015-5-e-agesex), and heart disease data (https://data.world/health/chsi-to-combat-obesity). The ETL scripts for those data sets are below.
+We also utilized joins to make the visualizations more interesting. We used a state table that divided up the different states into regions (https://data.world/markmarkoh/us-state-table), the US Census data for population (https://data.world/uscensusbureau/acs-2015-5-e-agesex), and Community Health Status Indicator (CHSI) data (https://data.world/health/chsi-to-combat-obesity). The ETL scripts for those data sets are below.
 
 ```{r}
 source("../01 Data/statetable ETL.R")
@@ -40,43 +40,26 @@ source("../01 Data/statetable ETL.R")
 ```{r}
 source("../01 Data/population_byage ETL.R")
 ```
+
+```{r}
+source("../01 Data/heartdisease ETL.R")
+```
+
+```{r}
+source("../01 Data/RiskFactors ETL.R")
+```
 #**Downloading the Data File**
-The cleaned up data file is hosted on Data.World. You can access it by going to this web address: https://data.world/christinalien/s-17-edv-project-6. The two datasets are named "adultobese.csv" and "adolescentobese.csv". Next, click the download button in the upper right hand corner of the screen. Download the file into a CSVs folder at the same level as the project folder. The file will download as a compressed (zipped) file containing a .csv file. Unzip the package, rename the csv to PreETL_adultobese.csv and PreETL_adolescentobese.csv and you should have the data file ready to go, just run the ETL.r script and it should clean up the data. Next, the cleaned up data was uploaded back into data.world and, using the query editor, we created a new column 'Age' that displayed Adult for the adult data and Adolescent for the adolescent data. Then, we combined the two tables using a union, downloaded the results to a csv, and uploaded the final result of the table as "Adult_Adolescent_Obesity.csv".
+The cleaned up data file is hosted on Data.World. You can access it by going to this web address: https://data.world/christinalien/s-17-dv-final-project. Next, click the download button in the upper right hand corner of the screen. Download the file into a CSVs folder at the same level as the project folder. The file will download as a compressed (zipped) file containing a .csv file. Unzip the package, rename the csv to PreETL_adultobese.csv and PreETL_adolescentobese.csv and you should have the data file ready to go, just run the ETL.r script and it should clean up the data. Next, the cleaned up data was uploaded back into data.world and, using the query editor, we created a new column 'Age' that displayed Adult for the adult data and Adolescent for the adolescent data. Then, we combined the two tables using a union, downloaded the results to a csv, and uploaded the final result of the table as "Adult_Adolescent_Obesity.csv".
 
 #**Data Visualization Introduction**
-We used Tableau and shiny Crosstabs with the Adult_Adolescent_Obesity data, joined onto Census data, to create interesting visualizations of our data so as to better understand the data that we are working with and what it means. Here are our 3 Tableau data visualizations and Shiny publication.
+
 
 #**Tableau Data Visualization 1**
 ![Barchart of Obesity Rates by Age and Region](../03 Visualizations/BarchartofRegionalObesity.PNG)
 
-This Tableau visualization is a barchart that depicts the different obesity rates across the different regions(Midwest, Northeast, South, West, and Null) and different ages (Adult and Adolescent). This Tableau visualization was created using a join of the Census statetable and the Adult_Adolescent_Obesity table, both of which were accessed using the data.world web connector. These two tables were joined using a left join on Location. Next, we dragged 'Region' and 'Age' onto rows, and 'Value' onto columns, and changed the sumamry method to average. We added average lines to each pane by clicking on Analytics -> Average Line -> Pane. Next, We created a calculated field called 'Calculated Difference from Average', which was AVG([Value])-WINDOW_AVG(AVG([Value])). We dragged that field onto color and label. 
-
-One interesting observation we made using this visualization was that the Adult obesity rates are consistently higher than the regional average, while the Adolescent obesity rates are consistently lower. Furthermore, The Midwest and the South have the highest differences between the Adult and Adolescent obesity rates. Finally, we noticed that the average obesity (for both age groups) across all regions is around 20%.
-
-#**Tableau Data Visualization 2**
-![Barchart of top 5 obese states by population](../03 Visualizations/barchart_top 5 obese populations.PNG)
-
-This visualization that we created on tableau contains the 5 states leading with obese population; be it either adolescent,adult, or both. We created this visualization using an inner join between the population_byage table and the Adult_Adolescent_Obesity table. These can both be found on data.world/christinalien/s-17-dv-project-6, as well as the tableau data connector. If you put AreaName and Age into columns and obesepop into rows(this is a calculated field with the following formula: IF [Age] == 'Adolescent' Then (([Value]/100) * [adolescentpop])
-ELSE (([Value]/100)*[adultpop])
-END) you will end up with the visualization that I have. For a few cosmetic effects we added obese pop to both color and label.
-
-What we thought was incredibly interesting about this visualization is how it shows that 3 out of the 5 most obese states led in both adolescent and adult obesity, which shows a trend in the culture of those states. In addition it seems that California is #1 in adult obesity, but doesn't make the top 5 in adolescent obesity, leading us to believe that obesity is on the decline in California, meaning healthier lifestyles are being adopted more in California than elsewhere. On the flipside, Ohio is the opposite, leading us to believe that less healthy lifestyles are being adopted by the youth in the state. Overall this visualization says a lot about the top 5 obese states.
-
-#**Tableau Data Visualization 3**
-![Barchart of Bottom 3 Obesity States by Region](../03 Visualizations/LeastObeseStatesbyRegion.PNG)
-
-This visualization is a barchart depicting the lowest 3 states per region (central, midwest, south, east, and null) across the two age groups (adolescent and adult). Using the web data connector in tableau, this visualization joined the Adult_Adolescent_Obesity table and Census statetable. After creating the same calculated field from visualization 1 and applied that to our color and label. 
-
-While the Midwest and South have the highest obesity rates in Adults and Adolescents, the lowest 3 states for all the regions are all very close in comparison to each other. With 8 points between the lowest state in the Adults category and the highest state, the difference between all the states are very consistent and do not offer much variety. That difference is even less in the Adolescents category with the low-high difference being a 4 point difference. This shows us that the Adults have much more variety and are susceptible to greater bouts of change in terms of their health, diet, and any other variables that we are unable to see here. 
-
 
 #**Shiny Publication**
 
-We replicated several of our Tableau visualizations using R code, Shiny Crosstabs, ggplot, and SQL queries. This application can be access at the link below. 
-
-https://bkim.shinyapps.io/barchartsproject6/
-
-The first tab reflects our first visualization showing the Obesity Rates by Region. The second tab shows us the Top 5 Obesity Populations. The third tab shows us a different version of the first tab using states as the X-variable to show the averages from the regions to reflect the third visualization, obesity by states in the region. 
 
 
 #**Conclusion**
