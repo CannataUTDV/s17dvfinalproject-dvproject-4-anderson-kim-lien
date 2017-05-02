@@ -11,6 +11,8 @@ require(leaflet)
 require(plotly)
 require(lubridate)
 
+
+#begin boxplot query
 boxplot1 <- query(
   data.world(propsfile = "www/.data.world"),
   dataset="christinalien/s-17-dv-final-project", type="sql",
@@ -20,12 +22,20 @@ boxplot1 <- query(
 "
 )
 
+#end boxplot query
+
+#begin histogram query
+
 histogram1 <- query(
   data.world(propsfile = "www/.data.world"),
   dataset="christinalien/s-17-dv-final-project", type="sql",
   query="SELECT CI_Max_Fruit_Veg as FruitsVegs FROM RiskFactors
   "
 )
+
+#end histogram query
+
+#begin scatterplot query
 
 scatterplot1 <-query(
   data.world(propsfile = "www/.data.world"),
@@ -37,6 +47,9 @@ scatterplot1 <-query(
   "
 ) 
 
+#end scatterplot query
+
+#begin barchart data
 barchartdf1 <- query(
   data.world(propsfile = "www/.data.world"),
   dataset="christinalien/s-17-dv-final-project", type="sql",
@@ -46,6 +59,8 @@ from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Na
   group by Location
   order by Location"
 )
+
+
 
 
 barchartdf2<-gather(barchartdf1,type,value,-Location)
@@ -140,6 +155,10 @@ barchartsmoker<- query(
   queryParameters = KPI_Smoker
 ) 
 
+
+#end barchart query
+
+#begin crosstab query
 crosstab1 <-query(
   data.world(propsfile = "www/.data.world"),
   dataset="christinalien/s-17-dv-final-project", type="sql",
@@ -153,8 +172,15 @@ crosstab1 <-query(
   order by a.census_region_name"
  ) 
 
+#end crosstab query
+
+#############shinyserver function begin##############
+
+
+
 shinyServer(function(input, output) {
-#boxplot
+  
+#begin boxplot tab
   output$boxplotData <- renderDataTable({DT::datatable(boxplot1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE))
   })
   
@@ -166,7 +192,9 @@ shinyServer(function(input, output) {
     ggplotly(p)
   })
   
-#histogram
+#end boxplot tab
+  
+#begin histogram tab
   output$histogramData <- renderDataTable({DT::datatable(histogram1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE))
   })
   
@@ -176,8 +204,9 @@ shinyServer(function(input, output) {
     ggplotly(p)
 
   })
+#end histogram tab
   
-#scatterplots
+#begin scatterplot tab
   output$scatterplotData <- renderDataTable({DT::datatable(scatterplot1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
   output$scatterplot <-renderPlotly({p <- ggplot(scatterplot1) + 
@@ -186,7 +215,11 @@ shinyServer(function(input, output) {
     geom_point(aes(x=Value, y=D_Wh_HeartDis, colour=Location), size=2)
     ggplotly(p)
   })
-#crosstabs
+  
+#end scatterplot tab
+  
+  
+#begin crosstab tab
   output$crosstabData <- renderDataTable({DT::datatable(crosstab1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
   
@@ -195,7 +228,11 @@ shinyServer(function(input, output) {
   geom_text(aes(x=Age,y=census_region_name,label=Value))+
   geom_tile(aes(x=Age, y=census_region_name, fill=kpi), alpha=0.50)
   })
-#barcharts
+  
+#end crosstab tab
+  
+  
+#begin barchart tab
   output$barchartData1 <- renderDataTable({DT::datatable(barchartdf1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
 
@@ -227,3 +264,6 @@ shinyServer(function(input, output) {
     ggplotly(p6)
   })
 })
+
+#end barchart tab 
+#end
