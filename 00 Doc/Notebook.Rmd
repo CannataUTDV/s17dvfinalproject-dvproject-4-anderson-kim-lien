@@ -59,7 +59,7 @@ Initially, we visualized the adolescent and adult obesity rate data from 2013 us
 
 The first visualization shows us the national average of obesity rates per age group (Adolescent and Adult). While the boxplot shows the averages, we wanted the viewer to be able to see the states that have high or low rates compared to the national average. This is why there is a combination of a scatterplot and boxplot in the shiny visualization. 
 
-The boxplot shows us that, on average, the Adolescents age group has a significantly lower rate than the national Adult average of obesity. While the Adolescent average obesity rate is only 12.9, the Adult group has more than double the rate at 29.4. Furthermore, through the shiny app, we are able to see that states with low Adolescent rates, Utah, have low Adult rates. This trend can also be seen in the high percentages for both groups (i.e. Arkansas). 
+The boxplot shows us that, on average, the Adolescents age group has a significantly lower rate than the national Adult average of obesity. While the Adolescent average obesity rate is only 12.9, **the Adult group has more than double the rate at 29.4**. Furthermore, through the shiny app, we are able to see that **states with low Adolescent rates, Utah, have low Adult rates**. This trend can also be seen in the high percentages for both groups (i.e. Arkansas). 
 
 #**Tableau Data Visualization 2** 
 ![Map of Obesity Rates per State](../03 Visualizations/MapOfObesityRates.PNG)
@@ -86,14 +86,14 @@ We created this visualization by joining the leadingCOD table to the adult_adole
 #**Tableau Data Visualization 5** 
 ![Histogram of Fruits/Vegs](../03 Visualizations/Histogram of FruitsVegs.PNG) 
 
-The histogram of Fruits/Veggies shows us that the average bin ranges from 80 to 90 with the highest count being 168. With the visualization, we can see that the probability that a state has malnutrition from lack of fruits and vegetables is fairly high and may play a part in obesity rates.
+The histogram of Fruits/Veggies shows us that the **average bin ranges from 80 to 90** with the highest count being 168. With the visualization, we can see that the probability that a state has malnutrition from lack of fruits and vegetables is fairly high and may play a part in obesity rates.
 
 #**Tableau Data Visualization 6** 
 ![Percent Fruits/Vegs per State](../03 Visualizations/Percent FruitsVeg per State.PNG) 
 
 By producing the calculated field of (([CI_Max_Fruit_Veg]/100)/100)*[totalpop], we were able to apply the states to the field and create a visualization that shows us how much of each state's population were getting low amounts of fruits and vegetables in their diet. The visualization not only tells us the population number, but also visually represents the highest populations of malnutrition.
 
-The visualization points out that the trends seen from the boxplot cannot fully be reflected in the malnutrition data. For example, Texas is on the higher end of obesity rates compared to the national average (as seen by the boxplot) and also boasts one of the largest populations of malnutrition. However, the states California, New York, and Florida have high populations of malnutrition, but still remain lower than the national average in terms of obesity.
+The visualization points out that the trends seen from the boxplot cannot fully be reflected in the malnutrition data. For example, Texas is on the higher end of obesity rates compared to the national average (as seen by the boxplot) and also boasts one of the largest populations of malnutrition. However, the states California, New York, and Florida have **high populations of malnutrition, but still remain lower than the national average in terms of obesity**.
 
 #**Tableau Data Visualization 7** 
 ![Trellis Bar Chart of Risk Factors](../03 Visualizations/Trellis Bar Chart of Risk Factors.PNG)
