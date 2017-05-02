@@ -1,6 +1,6 @@
 ---
-title: "<center><b>Visualizing 2013 Obesity Data</b></center>"
-author: "<center><b>Austin Anderson,Brian Kim, Christina Lien</b></center>"
+title: "<center><b>Visualizing 2014 Obesity Data</b></center>"
+author: "<center><b>Austin Anderson, Brian Kim, Christina Lien</b></center>"
 output:
   html_document:
     toc: yes
@@ -12,7 +12,7 @@ output:
 ---
 
 #**Introduction**
-This is our R Notebook used to show how to detailing the 3 Tableau visualizations and a Shiny publication of obesity data in the United States. The dataset was retrieved through data.world and cleaned up using an ETL script that we built. This includes our instructions on how to access the data as well as our process of creating the 3 visualizations and Shiny publication from the data set in question.
+This is our R Notebook used to show how to detailing our Tableau visualizations and a Shiny publication of obesity data in the United States. The dataset was retrieved through data.world and cleaned up using an ETL script that we built. This includes our instructions on how to access the data as well as our process of creating all of the visualizations and the Shiny publication from the data set in question.
 
 #**R Configuration**
 Below, we display our sessionInfo().
