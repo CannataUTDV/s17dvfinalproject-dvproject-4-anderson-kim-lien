@@ -2020,57 +2020,7 @@
     </datasource>
   </datasources>
   <worksheets>
-    <worksheet name='Percent Fruits/Veg per State'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='&quot;christinalien/s-17-dv-final-project&quot;' name='federated.1tecxrv1g5t9ej1azf29i0yt5lx2' />
-          </datasources>
-          <datasource-dependencies datasource='federated.1tecxrv1g5t9ej1azf29i0yt5lx2'>
-            <column caption='PercentFruits/Veg per State' datatype='real' name='[Calculation_2644457407947350016]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='(([v_11]/100)/100)*[v_3]' />
-            </column>
-            <column-instance column='[v_0]' derivation='None' name='[none:v_0:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Calculation_2644457407947350016]' derivation='Sum' name='[sum:Calculation_2644457407947350016:qk]' pivot='key' type='quantitative' />
-            <column aggregation='CountD' caption='AreaName' datatype='string' name='[v_0]' role='dimension' type='nominal' />
-            <column caption='CI_Max_Fruit_Veg' datatype='real' name='[v_11]' role='measure' type='quantitative' />
-            <column caption='totalpop' datatype='integer' name='[v_3]' role='measure' type='quantitative' />
-          </datasource-dependencies>
-          <aggregation value='true' />
-        </view>
-        <style />
-        <panes>
-          <pane>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Circle' />
-            <encodings>
-              <color column='[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:v_0:nk]' />
-              <size column='[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[sum:Calculation_2644457407947350016:qk]' />
-              <text column='[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:v_0:nk]' />
-              <text column='[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[sum:Calculation_2644457407947350016:qk]' />
-            </encodings>
-            <style>
-              <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
-                <format attr='mark-labels-cull' value='true' />
-                <format attr='mark-labels-line-first' value='true' />
-                <format attr='mark-labels-line-last' value='true' />
-                <format attr='mark-labels-range-min' value='true' />
-                <format attr='mark-labels-range-max' value='true' />
-                <format attr='mark-labels-mode' value='all' />
-                <format attr='mark-labels-range-scope' value='pane' />
-                <format attr='mark-labels-range-field' value='' />
-              </style-rule>
-            </style>
-          </pane>
-        </panes>
-        <rows />
-        <cols />
-      </table>
-    </worksheet>
-    <worksheet name='Sheet 2'>
+    <worksheet name='Histogram of Fruits/Vegs'>
       <table>
         <view>
           <datasources>
@@ -2103,44 +2053,57 @@
         </show-full-range>
       </table>
     </worksheet>
+    <worksheet name='Percent Fruits/Veg per State'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='&quot;christinalien/s-17-dv-final-project&quot;' name='federated.1tecxrv1g5t9ej1azf29i0yt5lx2' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1tecxrv1g5t9ej1azf29i0yt5lx2'>
+            <column caption='PercentFruits/Veg per State' datatype='real' name='[Calculation_2644457407947350016]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='(([v_11]/100)/100)*[v_3]' />
+            </column>
+            <column-instance column='[v_0]' derivation='None' name='[none:v_0:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_2644457407947350016]' derivation='Sum' name='[sum:Calculation_2644457407947350016:qk]' pivot='key' type='quantitative' />
+            <column aggregation='CountD' caption='AreaName' datatype='string' name='[v_0]' role='dimension' type='nominal' />
+            <column caption='CI_Max_Fruit_Veg' datatype='real' name='[v_11]' role='measure' type='quantitative' />
+            <column caption='totalpop' datatype='integer' name='[v_3]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <size column='[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[sum:Calculation_2644457407947350016:qk]' />
+              <text column='[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:v_0:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+    </worksheet>
   </worksheets>
   <windows source-height='30'>
-    <window class='worksheet' maximized='true' name='Percent Fruits/Veg per State'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card pane-specification-id='0' param='[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:v_0:nk]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <highlight>
-          <color-one-way>
-            <field>[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:PercentFruits/Veg per State (bin):qk]</field>
-            <field>[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:v_0:nk]</field>
-          </color-one-way>
-        </highlight>
-      </viewpoint>
-    </window>
-    <window class='worksheet' name='Sheet 2'>
+    <window class='worksheet' name='Histogram of Fruits/Vegs'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2170,6 +2133,36 @@
         <highlight>
           <color-one-way>
             <field>[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:CI_Max_Fruit_Veg (bin):qk]</field>
+            <field>[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:v_0:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+    </window>
+    <window class='worksheet' maximized='true' name='Percent Fruits/Veg per State'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:PercentFruits/Veg per State (bin):qk]</field>
             <field>[federated.1tecxrv1g5t9ej1azf29i0yt5lx2].[none:v_0:nk]</field>
           </color-one-way>
         </highlight>
