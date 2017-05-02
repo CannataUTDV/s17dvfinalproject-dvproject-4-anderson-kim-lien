@@ -22,11 +22,15 @@ dashboardPage(
     tabItems(
       tabItem(tabName = "boxplot",
               tabsetPanel(
-                tabPanel("Title 1"))), 
+                tabPanel("Data","This data is a join of the population_byname and the Adult_Adolescent_Obesity data",DT::dataTableOutput("boxplotData")),
+                tabPanel("Boxplot",plotlyOutput("boxplot",height=1000))
+                )),
       
       tabItem(tabName = "histogram",
               tabsetPanel(
-                tabPanel("Title 2"))),
+                tabPanel("Data","This data is a join of the population_byname and the Adult_Adolescent_Obesity data",DT::dataTableOutput("histogramData")),
+                tabPanel("Histogram",plotlyOutput("histogram",height=1000))
+              )),
       
       tabItem(tabName = "scatterplot",
               tabsetPanel(
