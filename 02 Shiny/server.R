@@ -20,7 +20,7 @@ from RiskFactors left join Adult_Adolescent_Obesity on RiskFactors.CHSI_State_Na
   where Location != 'District of Columbia'
   group by Location
   order by Location"
-) 
+)
 
 
 barchartdf2<-gather(barchartdf1,type,value,-Location)
@@ -115,8 +115,49 @@ barchartsmoker<- query(
   queryParameters = KPI_Smoker
 ) 
 
+crosstab1 <-query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT a.census_region_name, a.fips_state, b.Age,b.Value,b.Location,
+      case 
+  when (b.Age='Adolescent' AND b.Value<=13.7) or (b.Age='Adult' AND b.Value<=28.9) THEN '02 Low'
+  ELSE '01 High'
+  end as kpi
+  FROM statetable a join Adult_Adolescent_Obesity b
+  ON (a.name = b.Location)
+  order by a.census_region_name"
+ ) 
+
+scatterplot1 <-query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT avg(a.D_Wh_HeartDis), a.CHSI_State_Name, b.Age,avg(b.Value) as Value,b.Location
+  FROM leadingCOD a join Adult_Adolescent_Obesity b
+  ON (a.CHSI_State_Name = b.Location)
+  group by b.Location
+  "
+) 
+
 shinyServer(function(input, output) {
+#scatterplots
+  output$scatterplotData <- renderDataTable({DT::datatable(scatterplot1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
+  })
+  output$scatterplot <-renderPlotly({p <- ggplot(scatterplot1) + 
+    theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
+    theme(axis.text.y=element_text(size=16, hjust=0.5)) +
+    geom_point(aes(x=Value, y=D_Wh_HeartDis, colour=Location), size=2)
+    ggplotly(p)
+  })
+#crosstabs
+  output$crosstabData <- renderDataTable({DT::datatable(crosstab1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
+  })
   
+  output$crosstabplot<-renderPlot({ggplot(crosstab1) + 
+  theme(axis.text.y=element_text(size=10, hjust=0.5))+
+  geom_text(aes(x=Age,y=census_region_name,label=Value))+
+  geom_tile(aes(x=Age, y=census_region_name, fill=kpi), alpha=0.50)
+  })
+#barcharts
   output$barchartData1 <- renderDataTable({DT::datatable(barchartdf1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
 

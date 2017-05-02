@@ -30,11 +30,15 @@ dashboardPage(
       
       tabItem(tabName = "scatterplot",
               tabsetPanel(
-                tabPanel("Title 3"))),
+                tabPanel("Data","This data is a join of the Adult_Adolscent_Obesity data and the LeadingCOD table",hr(),DT::dataTableOutput("scatterplotData")),
+                tabPanel("Scatterplot",hr(),plotlyOutput("scatterplot",height=1000))
+                )),
       
       tabItem(tabName = "crosstabs",
               tabsetPanel(
-                tabPanel("Title 4"))),
+                tabPanel("Data","this data is a join of the Adult_Adolescent_Obesity data and the statetable data", DT::dataTableOutput("crosstabData"  )),
+                tabPanel("Obesity by region Crosstab","Crosstab of obesity by state grouped by region",plotOutput("crosstabplot",height=2000))
+                )),
       
       tabItem(tabName = "barchart",
               tabsetPanel(tabPanel("Data", "This data is a join of the Adult_Adolescent_Obesity data and the CHSI Risk Factors data",DT::dataTableOutput("barchartData1")),
