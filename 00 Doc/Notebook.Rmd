@@ -118,7 +118,7 @@ These visualizations utilize the set created previously to compare obesity rates
 
 #**Shiny Publication**
 
-https://bkim.shinyapps.io/finalproject/
+https://andersonaustin.shinyapps.io/visualizing2014obesity/
 
 In our Shiny publication, we have replicated the Tableau visualizations using R Code. The Shiny app can be accessed through the link above.
 

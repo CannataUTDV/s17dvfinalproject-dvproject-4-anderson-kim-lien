@@ -11,7 +11,23 @@ require(leaflet)
 require(plotly)
 require(lubridate)
 
+#begin map query
 
+map1 <- query(
+  data.world(propsfile = "www/.data.world"),
+  dataset="christinalien/s-17-dv-final-project", type="sql",
+  query="SELECT a.Age, a.Value, a.Location, b.State, b.Latitude, b.Longitude,
+  case when a.Age = 'Adult' then (a.Value - 28.9)
+  else (Value - 13.7)
+  end as Adjusted
+  from Adult_Adolescent_Obesity a join state_coordinates b on (a.Location = b.State)
+  where a.Age = 'Adult'
+  group by a.Location"
+)
+  
+mdf <- map1
+
+#end map query
 #begin boxplot query
 boxplot1 <- query(
   data.world(propsfile = "www/.data.world"),
@@ -179,6 +195,22 @@ crosstab1 <-query(
 
 
 shinyServer(function(input, output) {
+
+#begin map tab
+  output$mapData1 <- renderDataTable({DT::datatable(map1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE))
+  })
+  
+  output$mapPlot2 <- renderLeaflet({
+    leaflet(width = 400, height = 800) %>%
+      addTiles() %>%
+      setView(lng=-98.35,lat=39.5,zoom=4) %>%
+      addMarkers(lng = map1$Longitude,lat = map1$Latitude,
+                 options = markerOptions(riseOnHover=TRUE),
+                 popup = as.character(paste(map1$Location,", ","State Obesity Rate - National Average: ",map1$Adjusted)))
+    })
+  
+
+#end map tab
   
 #begin boxplot tab
   output$boxplotData <- renderDataTable({DT::datatable(boxplot1,rownames = FALSE,extensions = list(Responsive = TRUE, FixedHeader = TRUE))

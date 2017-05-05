@@ -11,6 +11,7 @@ dashboardPage(
   ),
   dashboardSidebar(
     sidebarMenu(
+      menuItem("Map", tabName = "Map", icon = icon("dashboard")),
       menuItem("Boxplot", tabName = "boxplot", icon = icon("dashboard")),
       menuItem("Histogram", tabName = "histogram", icon = icon("dashboard")),
       menuItem("Scatterplot", tabName = "scatterplot", icon = icon("dashboard")),
@@ -20,6 +21,11 @@ dashboardPage(
   ),
   dashboardBody(    
     tabItems(
+      tabItem(tabName = "Map",
+              tabsetPanel(
+                tabPanel("Data",hr(),DT::dataTableOutput("mapData1")),
+                tabPanel("Map",hr(),leafletOutput("mapPlot2"),height = 1900)
+              )),
       tabItem(tabName = "boxplot",
               tabsetPanel(
                 tabPanel("Data","This data is a join of the population_byname and the Adult_Adolescent_Obesity data",hr(),DT::dataTableOutput("boxplotData")),
